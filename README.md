@@ -1,4 +1,4 @@
-# Java Spring Security with [Auth0](https://auth0.com/) For Machine-To-Machine Communications
+# Java [Spring Security 5](https://spring.io/projects/spring-security) with [Auth0](https://auth0.com/) - Machine-To-Machine Communications
 
 Often times, a secure and authorized communication channel between different parts of an autonomous system is needed. For example, two backend services trying to communicate via REST API calls. For these cases, OAuth 2.0 provides the __client credentials grant flow__ to secure their communications.
 
@@ -74,13 +74,16 @@ spring:
 ```
 
 4. Finally, to test that the http://localhost:8888/api/account/private-scoped is properly protected by the __read:acccounts__ scope, make a GET request to http://localhost:8888/api/account/private-scoped using the same token as above. One should see a __403 Forbidden__ response, as this token does not possess the  __read:acccounts__ scope.
+
+*__Note:__ By default, Spring Security will create a __GrantedAuthority__ for each scope in the scope claim of the JWT. This is what enables the __hasAuthority("SCOPE_read:acccounts")__ method to restrict access to a valid JWT that contains the __read:accounts__ scope. See the __[SecurityConfig](https://github.com/junbetterway/spring-sec-auth0-m2m/blob/main/src/main/java/com/junbetterway/security/springauthzero/config/SecurityConfig.java)__ for more details.*
+
 5. To test that the above API is properly secured, go back to __[Auth0](https://auth0.com/)__ Dashboard:
-   i. Go to the __Permissions__ tab for the API you created above.
-   ii. Add a permission of __read:acccounts__ and provide a description.
-   iii. Go to the __Machine to Machine Applications__ tab.
-   iv. Expand your authorized test application and select by ticking the __read:acccounts__ scope, then click __UPDATE__ and then __CONTINUE__.
-   v. Click the __Test__ tab, then COPY TOKEN.
-   vi. Issue a GET request to http://localhost:8888/api/account/private-scoped, this time passing the token you obtained above (with the __read:acccounts__ scope) as an 
+   1. Go to the __Permissions__ tab for the API you created above.
+   2. Add a permission of __read:acccounts__ and provide a description.
+   3. Go to the __Machine to Machine Applications__ tab.
+   4. Expand your authorized test application and select by ticking the __read:acccounts__ scope, then click __UPDATE__ and then __CONTINUE__.
+   5. Click the __Test__ tab, then COPY TOKEN.
+   6. Issue a GET request to http://localhost:8888/api/account/private-scoped, this time passing the token you obtained above (with the __read:acccounts__ scope) as an 
         Authorization header set to Bearer YOUR-API-TOKEN-HERE. One should see the response:
 
 ```
