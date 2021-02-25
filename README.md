@@ -60,10 +60,10 @@ spring:
 
 2. Next, issue a GET request to http://localhost:8888/api/account/private. One should receive a __401 Unauthorized__ response.
 3. To test that your API is properly secured, you can obtain a test token in the __[Auth0](https://auth0.com/)__ Dashboard:
-   i. Go to the __Machine to Machine Applications__ tab for the API you created above.
-   ii. Ensure that your API test application is marked as authorized.
-   iii. Click the __Test__ tab, then COPY TOKEN.
-   iv. Issue again a GET request to the http://localhost:8888/api/account/private, this time passing the token you obtained above as an Authorization header set to                     Bearer YOUR-API-TOKEN-HERE. One should then see the response:
+   1. Go to the __Machine to Machine Applications__ tab for the API you created above.
+   2. Ensure that your API test application is marked as authorized.
+   3. Click the __Test__ tab, then COPY TOKEN.
+   4. Issue again a GET request to the http://localhost:8888/api/account/private, this time passing the token you obtained above as an Authorization header set to                     Bearer YOUR-API-TOKEN-HERE. One should then see the response:
 
 ```
 {
